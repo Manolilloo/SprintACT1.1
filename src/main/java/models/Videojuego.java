@@ -6,48 +6,49 @@ import exceptions.VideojuegoException;
 import java.io.IOException;
 
 public class Videojuego {
-    private static String titulo;
-    private static String genero;
-    private static String plataforma;
-    private static int anio;
-    private static int valoracion;
+    private  String titulo;
+    private  String genero;
+    private  String plataforma;
+    private  int anio;
+    private  int valoracion;
 
-    public Videojuego(String titulo, String genero, String plataforma, int anio, int valoracion) {
+    public Videojuego(String titulo, String genero, String plataforma, int anio, int valoracion) throws VideojuegoException {
         this.titulo = titulo;
         this.genero = genero;
         this.plataforma = plataforma;
         this.anio = anio;
-        this.valoracion = valoracion;
+        setValoracion(valoracion);
     }
 
-    public static String getTitulo() {
+    public  String getTitulo() {
         return titulo;
     }
 
-    public static String getGenero() {
+    public  String getGenero() {
         return genero;
     }
 
-    public static String getPlataforma() {
+    public  String getPlataforma() {
         return plataforma;
     }
 
-    public static int getAnio() {
+    public  int getAnio() {
         return anio;
     }
 
-    public static void setAnio(int anio) {
-        Videojuego.anio = anio;
+    public void setAnio(int anio) {
+
+        this.anio = anio;
     }
 
-    public static int getValoracion() {
+    public  int getValoracion() {
         return valoracion;
     }
 
-    public static void setValoracion(int valoracion) throws VideojuegoException {
+    public  void setValoracion(int valoracion) throws VideojuegoException {
         if (valoracion < 1 || valoracion > 10){
             throw new VideojuegoException("Valoracion invalida");
         }
-        Videojuego.valoracion = valoracion;
+        this.valoracion = valoracion;
     }
 }
