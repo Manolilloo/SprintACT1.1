@@ -6,11 +6,11 @@ import exceptions.VideojuegoException;
 import java.io.IOException;
 
 public class Videojuego {
-    private  String titulo;
-    private  String genero;
-    private  String plataforma;
-    private  int anio;
-    private  int valoracion;
+    private String titulo;
+    private String genero;
+    private String plataforma;
+    private int anio;
+    private int valoracion;
 
     public Videojuego(String titulo, String genero, String plataforma, int anio, int valoracion) throws VideojuegoException {
         this.titulo = titulo;
@@ -20,19 +20,19 @@ public class Videojuego {
         setValoracion(valoracion);
     }
 
-    public  String getTitulo() {
+    public String getTitulo() {
         return titulo;
     }
 
-    public  String getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public  String getPlataforma() {
+    public String getPlataforma() {
         return plataforma;
     }
 
-    public  int getAnio() {
+    public int getAnio() {
         return anio;
     }
 
@@ -41,11 +41,11 @@ public class Videojuego {
         this.anio = anio;
     }
 
-    public  int getValoracion() {
+    public int getValoracion() {
         return valoracion;
     }
 
-    public  void setValoracion(int valoracion) throws VideojuegoException {
+    public void setValoracion(int valoracion) throws VideojuegoException {
         if (valoracion < 1 || valoracion > 10){
             throw new VideojuegoException("Valoracion invalida");
         }
