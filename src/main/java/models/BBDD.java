@@ -6,9 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeMap;
 
 import exceptions.BBDDException;
+import exceptions.VideojuegoException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -45,8 +48,9 @@ public class BBDD {
 
     }
 
-    private void showAllVideogames() {
+    private List<Videojuego> getAllVideogames() {
         String sql = "SELCET * FROM videojuegos";
+        List<Videojuego> videojuegos = new ArrayList<>();
 
         try (Statement statement = c.createStatement()) {
             ResultSet rs = statement.executeQuery(sql);
@@ -58,10 +62,18 @@ public class BBDD {
                 int anio = rs.getInt(5);
                 int valoracion = rs.getInt(6);
 
+                videojuegos.add(new Videojuego(titulo,genero,plataforma,anio,valoracion));
             }
+
+            return videojuegos;
         } catch (SQLException e) {
             new BBDDException("No se ha podido mostrar los videojuegos");
+        } catch (VideojuegoException e) {
+            new BBDDException("No se ha podido crear el videojuego");
         }
+        return null;
     }
+
+
 }
 
