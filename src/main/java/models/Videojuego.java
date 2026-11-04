@@ -10,9 +10,9 @@ public class Videojuego {
     private String genero;
     private String plataforma;
     private int anio;
-    private int valoracion;
+    private double valoracion;
 
-    public Videojuego(String titulo, String genero, String plataforma, int anio, int valoracion) throws VideojuegoException {
+    public Videojuego(String titulo, String genero, String plataforma, int anio, double valoracion) throws VideojuegoException {
         this.titulo = titulo;
         this.genero = genero;
         this.plataforma = plataforma;
@@ -40,11 +40,11 @@ public class Videojuego {
         this.anio = anio;
     }
 
-    public int getValoracion() {
+    public double getValoracion() {
         return valoracion;
     }
 
-    public void setValoracion(int valoracion) throws VideojuegoException {
+    public void setValoracion(double valoracion) throws VideojuegoException {
         if (valoracion < 1 || valoracion > 10){
             throw new VideojuegoException("Valoracion invalida");
         }
