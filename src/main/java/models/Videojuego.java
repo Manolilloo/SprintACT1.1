@@ -50,4 +50,9 @@ public class Videojuego {
         }
         this.valoracion = valoracion;
     }
+
+    @Override
+    public String toString() {
+        return titulo+" "+genero+" "+plataforma+" "+anio+" "+valoracion;
+    }
 }
