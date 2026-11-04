@@ -41,7 +41,7 @@ public class BBDD {
            ps.setString(2, videojuego.getGenero());
            ps.setString(3, videojuego.getPlataforma());
            ps.setInt(4, videojuego.getAnio());
-           ps.setInt(5, videojuego.getValoracion());
+           ps.setDouble(5, videojuego.getValoracion());
 
 
            ps.executeUpdate();
@@ -52,10 +52,6 @@ public class BBDD {
     /** Conexión utilizada por la consulta de videojuegos. */
     Connection c = ConexionDB.getConnection();
 
-    /** Punto de entrada vacío, sin lógica asociada actualmente. */
-    static void main(String[] args) {
-
-    }
 
     /**
      * Recupera los videojuegos almacenados y construye una lista de objetos.
@@ -63,7 +59,7 @@ public class BBDD {
      *
      * @return lista de videojuegos, o {@code null} si ocurre un error
      */
-    private List<Videojuego> getAllVideogames() {
+    public List<Videojuego> getAllVideogames() {
         String sql = "SELCET * FROM videojuegos";
         List<Videojuego> videojuegos = new ArrayList<>();
 
