@@ -60,7 +60,7 @@ public class BBDD {
      * @return lista de videojuegos, o {@code null} si ocurre un error
      */
     public List<Videojuego> getAllVideogames() {
-        String sql = "SELCET * FROM videojuegos";
+        String sql = "SELECT * FROM videojuegos";
         List<Videojuego> videojuegos = new ArrayList<>();
 
         try (Statement statement = c.createStatement()) {

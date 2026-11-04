@@ -19,8 +19,8 @@ public class Main{
         int opcion = 0;
 
         while (opcion != -1){
-            System.out.println("1- Insertar videojuegos" +
-                    "2- Mostrar todos los juegos");
+            System.out.println("1- Insertar videojuegos \n" +
+                    "2- Mostrar todos los juegos \n");
             int opcionMenu = MiEntradaSalida.leerEntero("Introduce el numero de opción que quieras utilizar");
 
             switch (opcionMenu){
@@ -36,7 +36,11 @@ public class Main{
                 case 2 -> {
                     List<Videojuego> videojuegos = bbdd.getAllVideogames();
 
-                    videojuegos.forEach(System.out::println);
+                    if (videojuegos == null){
+                        System.out.println("No hay videojuegos para mostrar");
+                    }else {
+                        videojuegos.forEach(System.out::println);
+                    }
                 }
             }
         }
