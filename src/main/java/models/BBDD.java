@@ -8,23 +8,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
-
-import exceptions.BBDDException;
 import exceptions.VideojuegoException;
-
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
+
+/**
+ * Gestiona las operaciones de acceso a datos relacionadas con los videojuegos.
+ * Utiliza la conexión proporcionada por {@link ConexionDB}.
+ */
 public class BBDD {
+    /** Conexión usada para insertar videojuegos. */
     Connection conexion;
 
+    /** Obtiene la conexión compartida con la base de datos. */
     public BBDD() {
         conexion = ConexionDB.getConnection();
     }
 
+    /**
+     * Inserta un videojuego en la tabla {@code videojuegos}.
+     * Los valores se pasan mediante parámetros para evitar concatenarlos en SQL.
+     *
+     * @param videojuego videojuego cuyos datos se van a guardar
+     * @throws BBDDException si la base de datos no permite completar la inserción
+     */
     public void addVideo(Videojuego videojuego) throws BBDDException {
 
         String sql = "Insert into videojuegos (titulo, genero, plataforma, anio, valoracion) values (?,?,?,?,?) ";
@@ -42,12 +49,20 @@ public class BBDD {
            throw new BBDDException("Error al insertar el juego");
        }
     }
+    /** Conexión utilizada por la consulta de videojuegos. */
     Connection c = ConexionDB.getConnection();
 
+    /** Punto de entrada vacío, sin lógica asociada actualmente. */
     static void main(String[] args) {
 
     }
 
+    /**
+     * Recupera los videojuegos almacenados y construye una lista de objetos.
+     * Lee las columnas de cada fila y las usa para crear un {@link Videojuego}.
+     *
+     * @return lista de videojuegos, o {@code null} si ocurre un error
+     */
     private List<Videojuego> getAllVideogames() {
         String sql = "SELCET * FROM videojuegos";
         List<Videojuego> videojuegos = new ArrayList<>();
@@ -55,6 +70,7 @@ public class BBDD {
         try (Statement statement = c.createStatement()) {
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()){
+                // Las columnas se leen según el orden definido en la tabla.
                 int id = rs.getInt(1);
                 String titulo = rs.getString(2);
                 String genero = rs.getString(3);
