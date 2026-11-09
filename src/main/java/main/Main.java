@@ -21,9 +21,9 @@ public class Main{
         while (opcion != -1){
             System.out.println("1- Insertar videojuegos \n" +
                     "2- Mostrar todos los juegos \n");
-            int opcionMenu = MiEntradaSalida.leerEntero("Introduce el numero de opción que quieras utilizar");
+            opcion = MiEntradaSalida.leerEntero("Introduce el numero de opción que quieras utilizar");
 
-            switch (opcionMenu){
+            switch (opcion){
                 case 1 -> {
                     try {
                         bbdd.addVideo(crearVideojuego());
