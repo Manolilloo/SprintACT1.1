@@ -1,23 +1,38 @@
 package models;
 
-import exceptions.MiEntrdaSalidaException;
 import exceptions.VideojuegoException;
 
-import java.io.IOException;
-
 public class Videojuego {
+    private int id;
     private String titulo;
     private String genero;
     private String plataforma;
     private int anio;
     private double valoracion;
 
-    public Videojuego(String titulo, String genero, String plataforma, int anio, double valoracion) throws VideojuegoException {
+    public Videojuego(int id,String titulo, String genero, String plataforma, int anio, double valoracion) throws VideojuegoException {
+        this.id = id;
         this.titulo = titulo;
         this.genero = genero;
         this.plataforma = plataforma;
         this.anio = anio;
         setValoracion(valoracion);
+    }
+
+    public Videojuego(String titulo, String genero, String plataforma, int anio, double valoracion) {
+        this.titulo = titulo;
+        this.genero = genero;
+        this.plataforma = plataforma;
+        this.anio = anio;
+        this.valoracion = valoracion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitulo() {
@@ -53,6 +68,6 @@ public class Videojuego {
 
     @Override
     public String toString() {
-        return titulo+" "+genero+" "+plataforma+" "+anio+" "+valoracion;
+        return id + " "+titulo+" "+genero+" "+plataforma+" "+anio+" "+valoracion;
     }
 }

@@ -74,7 +74,7 @@ public class BBDD {
                 int anio = rs.getInt(5);
                 double valoracion = rs.getDouble(6);
 
-                videojuegos.add(new Videojuego(titulo,genero,plataforma,anio,valoracion));
+                videojuegos.add(new Videojuego(id,titulo,genero,plataforma,anio,valoracion));
             }
 
             return videojuegos;
@@ -119,5 +119,24 @@ public class BBDD {
         return null;
     }
 
-}
+    /**
+     * Elimina un videojuego de la base de datos según su identificador único.
+     *
+     * @param id identificador del videojuego a eliminar
+     * @throws BBDDException si ocurre un error durante la eliminación
+     */
+    public void deleteVideojuego(int id) throws BBDDException {
+        String sql = "DELETE FROM videojuegos WHERE id = ?";
 
+        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            int filasAfectadas = ps.executeUpdate();
+
+            if (filasAfectadas == 0) {
+                System.out.println("Aviso: No se encontró ningún videojuego con el ID " + id);
+            }
+        } catch (SQLException e) {
+            throw new BBDDException("Error al eliminar el videojuego con ID: " + id);
+        }
+    }
+}
