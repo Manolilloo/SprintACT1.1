@@ -87,46 +87,6 @@ public class BBDD {
     }
 
     /**
-     * Muestra por consola todos los títulos junto con sus IDs y
-     * luego permite eliminar uno introduciendo su ID.
-     *
-     * @param scanner Objeto Scanner para leer la entrada del usuario por consola
-     * @throws BBDDException si ocurre algún error en la base de datos
-     */
-    public void mostrarYBorrarVideojuego(java.util.Scanner scanner) throws BBDDException {
-        String sqlSelect = "SELECT id, titulo FROM videojuegos";
-
-        System.out.println("=== LISTADO DE VIDEOJUEGOS DISPONIBLES ===");
-        try (Statement statement = conexion.createStatement();
-             ResultSet rs = statement.executeQuery(sqlSelect)) {
-
-            boolean hayRegistros = false;
-            while (rs.next()) {
-                hayRegistros = true;
-                int id = rs.getInt("id");
-                String titulo = rs.getString("titulo");
-                System.out.println("ID: " + id + " | Título: " + titulo);
-            }
-
-            if (!hayRegistros) {
-                System.out.println("No hay videojuegos registrados en la base de datos.");
-                return;
-            }
-
-        } catch (SQLException e) {
-            throw new BBDDException("Error al listar los videojuegos");
-        }
-
-        // Solicitar el ID a borrar
-        System.out.print("\nIntroduce el ID del videojuego que deseas borrar: ");
-        int idBorrar = scanner.nextInt();
-
-        // Ejecutar el borrado
-        deleteVideojuego(idBorrar);
-        System.out.println("¡Videojuego con ID " + idBorrar + " borrado correctamente!");
-    }
-
-    /**
      * Elimina un videojuego de la base de datos según su identificador único.
      *
      * @param id identificador del videojuego a eliminar
