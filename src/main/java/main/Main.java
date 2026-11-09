@@ -39,7 +39,17 @@ public class Main{
                     if (videojuegos == null){
                         System.out.println("No hay videojuegos para mostrar");
                     }else {
-                        videojuegos.forEach(System.out::println);
+                        System.out.printf("\n%-30s | %-15s | %-15s | %-5s | %-10s%n", "TÍTULO", "GÉNERO", "PLATAFORMA", "AÑO", "VALORACIÓN\n");
+                        for(Videojuego v : videojuegos){
+                            System.out.printf("%-30s | %-15s | %-15s | %-5d | %-10.1f%n",
+                                    v.getTitulo(),
+                                    v.getGenero(),
+                                    v.getPlataforma(),
+                                    v.getAnio(),
+                                    v.getValoracion()
+                            );
+                        }
+                        System.out.println();
                     }
                 }
             }
