@@ -34,13 +34,18 @@ public class Main{
                     }
                 }
                 case 2 -> {
-                    List<Videojuego> videojuegos = bbdd.getAllVideogames();
+                    try {
+                        List<Videojuego> videojuegos = bbdd.getAllVideogames();
 
-                    if (videojuegos == null){
-                        System.out.println("No hay videojuegos para mostrar");
-                    }else {
-                        videojuegos.forEach(System.out::println);
+                        if (videojuegos == null){
+                            System.out.println("No hay videojuegos para mostrar");
+                        }else {
+                            videojuegos.forEach(System.out::println);
+                        }
+                    }catch (BBDDException e){
+                        System.out.println(e.getMessage());
                     }
+
                 }
             }
         }

@@ -59,7 +59,7 @@ public class BBDD {
      *
      * @return lista de videojuegos, o {@code null} si ocurre un error
      */
-    public List<Videojuego> getAllVideogames() {
+    public List<Videojuego> getAllVideogames() throws BBDDException {
         String sql = "SELECT * FROM videojuegos";
         List<Videojuego> videojuegos = new ArrayList<>();
 
@@ -72,20 +72,52 @@ public class BBDD {
                 String genero = rs.getString(3);
                 String plataforma = rs.getString(4);
                 int anio = rs.getInt(5);
-                int valoracion = rs.getInt(6);
+                double valoracion = rs.getDouble(6);
 
                 videojuegos.add(new Videojuego(titulo,genero,plataforma,anio,valoracion));
             }
 
             return videojuegos;
         } catch (SQLException e) {
-            new BBDDException("No se ha podido mostrar los videojuegos");
+            throw new BBDDException("No se ha podido mostrar los videojuegos");
         } catch (VideojuegoException e) {
-            new BBDDException("No se ha podido crear el videojuego");
+            throw new BBDDException("No se ha podido crear el videojuego");
+        }
+    }
+
+    /**
+     * Metodo para buscar en la bbdd un videojuego por un titulo
+     * @param titulo titulo a buscar
+     * @return el videojuego o nulo si no lo encuentra
+     * @throws BBDDException
+     */
+    public Videojuego searchVideogame(String titulo) throws BBDDException {
+
+        String sql = "Select * from videojuego where titulo = ?";
+
+        try (PreparedStatement ps = conexion.prepareStatement(sql)){
+            ps.setString(1,titulo);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                int id = rs.getInt(1);
+                String tituloGame = rs.getString(2);
+                String genero = rs.getString(3);
+                String plataforma = rs.getString(4);
+                int anio = rs.getInt(5);
+                double valoracion = rs.getDouble(6);
+
+                return new Videojuego(tituloGame,genero,plataforma,anio,valoracion);
+            }
+
+        } catch (SQLException e) {
+            throw new BBDDException("Error con la base de datos: "+ e.getMessage());
+        }catch (VideojuegoException e){
+            throw new BBDDException("Error al crear el videojuego "+ e.getMessage());
         }
         return null;
     }
-
 
 }
 
