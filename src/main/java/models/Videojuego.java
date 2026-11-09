@@ -19,12 +19,12 @@ public class Videojuego {
         setValoracion(valoracion);
     }
 
-    public Videojuego(String titulo, String genero, String plataforma, int anio, double valoracion) {
+    public Videojuego(String titulo, String genero, String plataforma, int anio, double valoracion) throws VideojuegoException {
         this.titulo = titulo;
         this.genero = genero;
         this.plataforma = plataforma;
         this.anio = anio;
-        this.valoracion = valoracion;
+        setValoracion(valoracion);
     }
 
     public int getId() {
